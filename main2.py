@@ -8,9 +8,12 @@ import sys
 class MainWindows(QMainWindow):
     def __init__(self):
         super().__init__()
-        
+        self.primaryScreen = QApplication.primaryScreen()        
+        self.screenSize = self.primaryScreen.size()
+        self.width = self.screenSize.width()
+        self.height = self.screenSize.height()
         self.setWindowTitle("Панель задач PyQt6")
-        self.setGeometry(100, 100, 800, 600)
+        self.setGeometry(0,0 , self.width, self.height)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 
@@ -39,7 +42,7 @@ class MainWindows(QMainWindow):
         
         
         self.setCentralWidget(self.video_widget)
-        self.showFullScreen()
+
         self.player.play()
         
         self.power.clicked.connect(self.powers)
